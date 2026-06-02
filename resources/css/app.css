@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,6 +7,86 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Open Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+:root {
+    --background: #f4f9f6;
+    --primary: #10b981;
+    --secondary: #eab308;
+    --accent: #06b6d4;
+}
+
+.bg-mesh {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(at 15% 10%, color-mix(in oklab, var(--primary) 18%, transparent) 0px, transparent 45%),
+      radial-gradient(at 85% 5%, color-mix(in oklab, var(--secondary) 20%, transparent) 0px, transparent 45%),
+      radial-gradient(at 70% 90%, color-mix(in oklab, var(--accent) 18%, transparent) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+.btn-primary {
+    @apply bg-gradient-to-r from-[#FFEE8C] to-[#fbcd62] text-slate-800 font-bold px-8 py-4 rounded-2xl shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-yellow-500/10 hover:from-[#fff5b8] hover:to-[#fbbd38] border border-[#f5de82] inline-block;
+}
+
+.btn-primary-sm {
+    @apply bg-gradient-to-r from-[#FFEE8C] to-[#fbcd62] text-slate-800 font-bold px-5 py-2.5 rounded-xl shadow-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md hover:shadow-yellow-500/10 hover:from-[#fff5b8] hover:to-[#fbbd38] border border-[#f5de82] inline-block text-sm;
+}
+
+.site-header {
+    @apply w-full px-8 py-6 flex justify-between items-center;
+}
+
+.logo-text {
+    @apply text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#008f5d] to-[#0ea5e9] inline-block;
+}
+
+.main-container {
+    @apply w-full max-w-3xl mx-auto px-6 py-12 flex-grow flex flex-col items-center justify-center text-center space-y-8;
+}
+
+.page-title {
+    @apply text-5xl sm:text-6xl font-black tracking-tight leading-tight text-slate-900;
+}
+
+.page-subtitle {
+    @apply text-base sm:text-lg text-slate-500 font-normal max-w-xl leading-relaxed;
+}
+
+.site-footer {
+    @apply w-full max-w-7xl mx-auto px-6 py-6 text-center text-xs text-slate-400;
+}
+
+.features-container {
+    @apply w-full max-w-6xl mx-auto px-8 pb-16;
+}
+
+.features-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+.feature-card {
+    @apply bg-white/70 backdrop-blur-md p-8 rounded-[2rem] border border-white/20 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-start text-left;
+}
+
+.feature-icon-wrapper {
+    @apply w-12 h-12 rounded-xl bg-emerald-50/50 text-[#008744] flex items-center justify-center mb-6 border border-emerald-500/10;
+}
+
+.feature-icon {
+    @apply w-6 h-6;
+}
+
+.feature-title {
+    @apply text-base font-bold text-slate-900 mb-2;
+}
+
+.feature-description {
+    @apply text-sm text-slate-500 font-normal leading-relaxed;
+}
+
+.text-gradient-green-blue {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#008f5d] to-[#0ea5e9] font-bold;
 }
