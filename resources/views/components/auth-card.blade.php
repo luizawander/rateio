@@ -3,12 +3,14 @@
     subtitle="Bem-vindo de volta. Continue de onde parou." 
     onClose="goToLanding()"
 >
-    <form id="auth-form" class="space-y-5" onsubmit="event.preventDefault(); handleAuthSubmit();">
+    <form id="auth-form" method="POST" action="/login" class="space-y-5" novalidate>
+        @csrf
+        <input type="hidden" name="auth_mode" id="auth_mode_input" value="{{ old('auth_mode', 'login') }}">
         <div id="field-name" class="hidden opacity-0 max-h-0 overflow-hidden transition-all duration-300">
-            <x-input-field label="Nome Completo" id="name" placeholder="Como quer ser chamado?" />
+            <x-input-field label="Nome Completo" id="name" placeholder="Como quer ser chamado?" value="{{ old('name') }}" />
         </div>
 
-        <x-input-field label="E-mail" id="email" type="email" required placeholder="voce@email.com" />
+        <x-input-field label="E-mail" id="email" type="email" required placeholder="voce@email.com" value="{{ old('email') }}" />
 
         <div>
             <x-input-field label="Senha" id="password" type="password" required placeholder="••••••••" />
@@ -29,10 +31,15 @@
         <span class="relative px-4 bg-white/95 text-xs font-semibold text-slate-400 uppercase tracking-wider">ou</span>
     </div>
 
-    <x-button type="button" onclick="alert('Google login')" variant="white">
-        <x-google-icon class="mr-3 inline-block" />
-        Continuar com Google
-    </x-button>
+    <div>
+        <x-button type="button" onclick="window.location.href='/auth/google'" variant="white">
+            <x-google-icon class="mr-3 inline-block" />
+            Continuar com Google
+        </x-button>
+        @error('oauth')
+            <p class="mt-2 text-xs font-semibold text-rose-600 text-center">{{ $message }}</p>
+        @enderror
+    </div>
 
     <div class="mt-8 text-center text-sm text-slate-500">
         <span id="toggle-text">Não tem conta?</span>

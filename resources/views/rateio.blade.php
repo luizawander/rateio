@@ -7,9 +7,24 @@
                     <span class="logo-text cursor-pointer" onclick="goToLanding()">Rateio</span>
                 </div>
                 <div id="header-action-btn">
-                    <a href="#login" onclick="goToAuth('login')" class="btn-primary-sm">
-                        login
-                    </a>
+                    @auth
+                        <div class="flex items-center gap-3">
+                            @if (auth()->user()->avatar)
+                                <img src="{{ auth()->user()->avatar }}" class="w-8 h-8 rounded-full border border-slate-200" alt="Avatar">
+                            @endif
+                            <span class="text-sm font-semibold text-slate-700">Olá, {{ auth()->user()->name }}!</span>
+                            <form action="/logout" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" class="btn-primary-sm bg-rose-50 text-rose-600 hover:from-rose-100 hover:to-rose-200 border-rose-200 cursor-pointer">
+                                    sair
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <a href="#login" onclick="goToAuth('login')" class="btn-primary-sm">
+                            login
+                        </a>
+                    @endauth
                 </div>
             </header>
             <div class="flex-grow flex flex-col items-center justify-center my-auto w-full">
@@ -20,11 +35,20 @@
                     <p class="page-subtitle">
                         Crie grupos, registre despesas parceladas e veja em segundos quem deve quanto para quem.
                     </p>
-                    <div id="hero-action-btn" class="pt-4">
-                        <a href="#register" onclick="goToAuth('register')" class="btn-primary text-base">
-                            criar minha conta
-                        </a>
-                    </div>
+                    @auth
+                        <div class="pt-4 flex items-center justify-center">
+                            <span class="px-6 py-3 bg-emerald-50 text-emerald-700 font-bold border border-emerald-200 rounded-full flex items-center gap-2">
+                                <x-heroicon-o-check-circle class="w-5 h-5 text-emerald-600" />
+                                Você está autenticado com sucesso!
+                            </span>
+                        </div>
+                    @else
+                        <div id="hero-action-btn" class="pt-4">
+                            <a href="#register" onclick="goToAuth('register')" class="btn-primary text-base">
+                                criar minha conta
+                            </a>
+                        </div>
+                    @endauth
                 </main>
                 <div class="features-container">
                     <div class="features-grid">
@@ -72,6 +96,15 @@
         const toggleModeLink = document.getElementById('toggle-mode-link');
         const forgotPassword = document.getElementById('forgot-password');
         const nameInput = document.getElementById('name');
+        const authForm = document.getElementById('auth-form');
+        const authModeInput = document.getElementById('auth_mode_input');
+
+        if (authForm) {
+            authForm.action = mode === 'register' ? '/register' : '/login';
+        }
+        if (authModeInput) {
+            authModeInput.value = mode;
+        }
 
         if (mode === 'register') {
             authTitle.textContent = 'Criar conta';
@@ -91,7 +124,7 @@
         } else {
             authTitle.textContent = 'Entrar na sua conta';
             authSubtitle.textContent = 'Bem-vindo de volta. Continue de onde parou.';
-            submitBtn.textContent = 'entrar';
+            submitBtn.textContent = 'Entrar';
             toggleText.textContent = 'Não tem conta?';
             toggleModeLink.textContent = 'Criar agora';
             forgotPassword.classList.remove('hidden');
@@ -116,9 +149,14 @@
         const nextMode = currentAuthMode === 'login' ? 'register' : 'login';
         goToAuth(nextMode);
     }
-
-    function handleAuthSubmit() {
-        alert(`Formulário enviado no modo: ${currentAuthMode}`);
-    }
 </script>
+
+@if ($errors->any())
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const mode = "{{ old('auth_mode', 'login') }}";
+        goToAuth(mode);
+    });
+</script>
+@endif
 </x-layout>
