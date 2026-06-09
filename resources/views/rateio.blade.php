@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rateio</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-mesh min-h-screen flex flex-col justify-between text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
-    
+<x-layout>
     <header class="site-header">
         <div class="flex items-center gap-2">
             <span class="logo-text">Rateio</span>
@@ -74,5 +64,4 @@
     <footer class="site-footer">
         <p>&copy; {{ date('Y') }} Rateio.</p>
     </footer>
-</body>
-</html>
+</x-layout>
