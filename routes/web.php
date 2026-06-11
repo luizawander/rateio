@@ -9,3 +9,5 @@ Route::get('/', function () {
 
 Route::get('/auth/google', [OAuthController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('/auth/google/callback', [OAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+Route::get('/home', function () {return view('home');})
+    ->middleware('auth')->name('home');

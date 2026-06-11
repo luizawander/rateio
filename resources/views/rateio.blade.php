@@ -21,9 +21,9 @@
                             </form>
                         </div>
                     @else
-                        <a href="#login" onclick="goToAuth('login')" class="btn-primary-sm">
+                        <button onclick="goToAuth('login')" class="btn-primary-sm cursor-pointer">
                             login
-                        </a>
+                        </button>
                     @endauth
                 </div>
             </header>
@@ -44,9 +44,9 @@
                         </div>
                     @else
                         <div id="hero-action-btn" class="pt-4">
-                            <a href="#register" onclick="goToAuth('register')" class="btn-primary text-base">
+                            <button onclick="goToAuth('register')" class="btn-primary text-base cursor-pointer">
                                 criar minha conta
-                            </a>
+                            </button>
                         </div>
                     @endauth
                 </main>
@@ -143,6 +143,9 @@
 
     function goToLanding() {
         document.getElementById('app-container').classList.remove('auth-mode');
+        if (window.location.hash) {
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
     }
 
     function toggleAuthMode() {
