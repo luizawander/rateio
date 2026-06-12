@@ -4,7 +4,7 @@
         <div id="left-pane">
             <header class="site-header">
                 <div class="flex items-center gap-2">
-                    <span class="logo-text cursor-pointer" onclick="goToLanding()">Rateio</span>
+                    <x-logo class="cursor-pointer" onclick="goToLanding()" />
                 </div>
                 <div id="header-action-btn">
                     @auth
