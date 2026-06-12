@@ -24,6 +24,14 @@ class User extends Authenticatable
         'password',
         'google_id',
         'avatar',
+        'phone',
+        'gender',
+        'birth_date',
+        'email_notifications',
+        'due_reminders',
+        'weekly_summary',
+        'pix_key_type',
+        'pix_key',
     ];
 
     /**
@@ -46,6 +54,10 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
+            'email_notifications' => 'boolean',
+            'due_reminders' => 'boolean',
+            'weekly_summary' => 'boolean',
         ];
     }
 }

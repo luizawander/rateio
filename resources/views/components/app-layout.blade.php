@@ -6,8 +6,8 @@
 <x-layout :title="$title">
     <div class="min-h-screen flex flex-col relative overflow-x-hidden">
         
-        <header class="hidden lg:block pt-10 pb-6 text-center w-full">
-            <x-logo size="text-5xl" />
+        <header class="hidden lg:flex items-center justify-center py-6 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 w-full mb-12">
+            <x-logo size="text-4xl" />
         </header>
 
         <header class="lg:hidden flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 w-full">
@@ -22,7 +22,7 @@
 
         <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-40 hidden lg:hidden opacity-0 transition-opacity duration-300"></div>
 
-        <div class="w-full max-w-[1360px] flex flex-col flex-grow px-4 sm:px-6 lg:pl-24 lg:pr-8">
+        <div class="w-full flex flex-col flex-grow px-4 sm:px-6 lg:pl-24 lg:pr-24">
             <div class="flex-grow flex flex-col lg:flex-row items-start">
                 <div class="lg:w-72 lg:mx-6 lg:mb-6 flex-shrink-0 w-full lg:w-auto">
                     <x-sidebar :active="$active" />
