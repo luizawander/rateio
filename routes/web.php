@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\OAuthController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,6 @@ Route::get('/notifications', function () {
     return view('notifications');
 })->middleware('auth')->name('notifications');
 
-Route::get('/settings', function () {
-    return view('settings');
-})->middleware('auth')->name('settings');
+Route::get('/settings', [SettingsController::class, 'index'])->middleware('auth')->name('settings');
+Route::post('/settings', [SettingsController::class, 'update'])->middleware('auth')->name('settings.update');
+Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->middleware('auth')->name('settings.password');
