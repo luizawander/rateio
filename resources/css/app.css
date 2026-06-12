@@ -50,7 +50,7 @@
 }
 
 .logo-text {
-    @apply text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#008f5d] to-[#0ea5e9] inline-block;
+    @apply font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#008f5d] to-[#0ea5e9] inline-block;
 }
 
 .main-container {

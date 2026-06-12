@@ -4,31 +4,35 @@
 ])
 
 <x-layout :title="$title">
-    <div class="min-h-screen flex flex-col lg:flex-row relative overflow-x-hidden">
+    <div class="min-h-screen flex flex-col relative overflow-x-hidden">
         
+        <header class="hidden lg:block pt-10 pb-6 text-center w-full">
+            <x-logo size="text-5xl" />
+        </header>
+
         <header class="lg:hidden flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 w-full">
             <button id="mobile-menu-toggle" class="p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-100 active:scale-95 transition-all cursor-pointer" aria-label="Abrir menu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
-            <x-logo class="text-xl" />
+            <x-logo size="text-2xl" />
             <div class="w-10"></div>
         </header>
 
         <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-40 hidden lg:hidden opacity-0 transition-opacity duration-300"></div>
 
-        <div class="lg:flex lg:flex-col lg:w-72 lg:m-6 lg:gap-6 flex-shrink-0">
-            <div class="hidden lg:block pl-4">
-                <x-logo class="text-3xl" />
+        <div class="w-full max-w-[1360px] flex flex-col flex-grow px-4 sm:px-6 lg:pl-24 lg:pr-8">
+            <div class="flex-grow flex flex-col lg:flex-row items-start">
+                <div class="lg:w-72 lg:mx-6 lg:mb-6 flex-shrink-0 w-full lg:w-auto">
+                    <x-sidebar :active="$active" />
+                </div>
+
+                <main class="flex-grow p-6 lg:p-10 lg:pt-0 z-10 w-full">
+                    {{ $slot }}
+                </main>
             </div>
-
-            <x-sidebar :active="$active" />
         </div>
-
-        <main class="flex-grow p-6 lg:p-10 z-10">
-            {{ $slot }}
-        </main>
     </div>
 </x-layout>
 
