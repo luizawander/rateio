@@ -5,9 +5,11 @@
             <x-button variant="pastel-green" :full="false" size="sm">
                 Convites pendentes
             </x-button>
-            <x-button variant="gold" :full="false" size="sm">
+            <x-button id="open-new-group-modal" onclick="ModalDialog.open('new-group-modal')" variant="gold" :full="false" size="sm">
                 + Novo grupo
             </x-button>
         </div>
     </div>
+
+    <x-new-group-modal :group-types="$groupTypes" />
 </x-app-layout>

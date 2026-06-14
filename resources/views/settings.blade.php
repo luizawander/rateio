@@ -76,7 +76,7 @@
                         <button type="button" id="cancel-edit-btn" class="px-6 py-2.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer">
                             Cancelar
                         </button>
-                        <x-button type="button" id="open-change-password-modal" variant="pastel-green" :full="false" size="sm" class="px-6 py-2.5 text-sm">
+                        <x-button type="button" id="open-change-password-modal" onclick="ModalDialog.open('change-password-modal')" variant="pastel-green" :full="false" size="sm" class="px-6 py-2.5 text-sm">
                             Alterar senha
                         </x-button>
                         <x-button type="submit" variant="gold" :full="false" size="sm" class="px-6 py-2.5 text-sm">
@@ -97,103 +97,9 @@
             </x-card>
         </div>
     </form>
-
-    <!-- Modal de Alterar Senha -->
-    <div id="change-password-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <!-- Fundo Escurecido (Backdrop) -->
-        <div id="change-password-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-        
-        <!-- Conteúdo do Modal (Layout Branco do Card) -->
-        <div class="w-full max-w-lg bg-white/95 backdrop-blur-xl p-10 sm:p-12 rounded-[2.5rem] border border-slate-100/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col relative overflow-hidden m-4 transform scale-95 transition-transform duration-300">
-            <!-- Efeitos decorativos em degradê semelhantes ao modal padrão -->
-            <div class="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <!-- Botão de Fechar (X) -->
-            <button type="button" id="close-change-password-modal" class="absolute top-6 right-6 p-2 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-all duration-200 active:scale-95 z-10 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <!-- Título do Modal -->
-            <div class="mb-8 relative">
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Alterar Senha</h2>
-                <p class="text-sm text-slate-500 mt-2">Confirme sua senha atual e escolha uma nova senha segura.</p>
-            </div>
-
-            <!-- Formulário de Alteração de Senha -->
-            <form action="{{ route('settings.password') }}" method="POST" class="space-y-5 relative">
-                @csrf
-                @method('PUT')
-                
-                <x-input-field label="Senha atual" id="current_password" type="password" required placeholder="Confirme sua senha atual" />
-                
-                <x-input-field label="Nova senha" id="new_password" type="password" required placeholder="Digite a nova senha" />
-                
-                <x-input-field label="Confirmar nova senha" id="new_password_confirmation" type="password" required placeholder="Repita a nova senha" />
-                
-                <div class="pt-4 flex justify-end gap-3">
-                    <button type="button" id="cancel-change-password" class="px-6 py-2.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer">
-                        Cancelar
-                    </button>
-                    <x-button type="submit" variant="gold" :full="false" size="sm" class="px-6 py-2.5 text-sm">
-                        Alterar Senha
-                    </x-button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <x-change-password-modal />
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Modal de Alterar Senha
-            const modal = document.getElementById('change-password-modal');
-            const openBtn = document.getElementById('open-change-password-modal');
-            const closeBtn = document.getElementById('close-change-password-modal');
-            const cancelBtn = document.getElementById('cancel-change-password');
-            const backdrop = document.getElementById('change-password-backdrop');
-            const modalContent = modal ? modal.querySelector('.transform') : null;
-
-            function openModal() {
-                if (!modal) return;
-                modal.classList.remove('hidden');
-                void modal.offsetWidth;
-                modal.classList.remove('opacity-0');
-                modal.classList.add('opacity-100');
-                
-                if (modalContent) {
-                    modalContent.classList.remove('scale-95');
-                    modalContent.classList.add('scale-100');
-                }
-            }
-
-            function closeModal() {
-                if (!modal) return;
-                modal.classList.remove('opacity-100');
-                modal.classList.add('opacity-0');
-                
-                if (modalContent) {
-                    modalContent.classList.remove('scale-100');
-                    modalContent.classList.add('scale-95');
-                }
-                
-                const transitionHandler = () => {
-                    modal.classList.add('hidden');
-                    modal.removeEventListener('transitionend', transitionHandler);
-                };
-                modal.addEventListener('transitionend', transitionHandler);
-            }
-
-            if (openBtn) openBtn.addEventListener('click', openModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-            if (backdrop) backdrop.addEventListener('click', closeModal);
-
-            // Abre o modal automaticamente caso existam erros de validação da senha
-            @if($errors->has('current_password') || $errors->has('new_password'))
-                openModal();
-            @endif
 
             const editBtn = document.getElementById('edit-profile-btn');
             const cancelEditBtn = document.getElementById('cancel-edit-btn');
