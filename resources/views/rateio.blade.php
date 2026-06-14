@@ -4,7 +4,7 @@
         <div id="left-pane">
             <header class="site-header">
                 <div class="flex items-center gap-2">
-                    <x-logo class="cursor-pointer" onclick="goToLanding()" />
+                    <x-logo size="text-4xl" class="cursor-pointer" onclick="goToLanding()" />
                 </div>
                 <div id="header-action-btn">
                     @auth
@@ -89,6 +89,10 @@
         currentAuthMode = mode;
         
         const nameField = document.getElementById('field-name');
+        const phoneField = document.getElementById('field-phone');
+        const passwordConfirmationField = document.getElementById('field-password-confirmation');
+        const emailWrapper = document.getElementById('email-wrapper');
+        const passwordWrapper = document.getElementById('password-wrapper');
         const authTitle = document.getElementById('auth-title');
         const authSubtitle = document.getElementById('auth-subtitle');
         const submitBtn = document.getElementById('submit-btn');
@@ -96,6 +100,8 @@
         const toggleModeLink = document.getElementById('toggle-mode-link');
         const forgotPassword = document.getElementById('forgot-password');
         const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const passwordConfirmationInput = document.getElementById('password_confirmation');
         const authForm = document.getElementById('auth-form');
         const authModeInput = document.getElementById('auth_mode_input');
 
@@ -114,12 +120,26 @@
             toggleModeLink.textContent = 'Fazer login';
             forgotPassword.classList.add('hidden');
             
+            if (emailWrapper) emailWrapper.className = 'col-span-2 md:col-span-1';
+            if (passwordWrapper) passwordWrapper.className = 'col-span-2 md:col-span-1 relative';
+
             nameField.classList.remove('hidden');
             nameInput.setAttribute('required', 'true');
+            phoneField.classList.remove('hidden');
+            phoneInput.setAttribute('required', 'true');
+            passwordConfirmationField.classList.remove('hidden');
+            passwordConfirmationInput.setAttribute('required', 'true');
+
             setTimeout(() => {
                 nameField.style.maxHeight = '100px';
                 nameField.classList.remove('opacity-0');
                 nameField.classList.add('opacity-100');
+                phoneField.style.maxHeight = '100px';
+                phoneField.classList.remove('opacity-0');
+                phoneField.classList.add('opacity-100');
+                passwordConfirmationField.style.maxHeight = '100px';
+                passwordConfirmationField.classList.remove('opacity-0');
+                passwordConfirmationField.classList.add('opacity-100');
             }, 50);
         } else {
             authTitle.textContent = 'Entrar na sua conta';
@@ -129,12 +149,26 @@
             toggleModeLink.textContent = 'Criar agora';
             forgotPassword.classList.remove('hidden');
             
+            if (emailWrapper) emailWrapper.className = 'col-span-2';
+            if (passwordWrapper) passwordWrapper.className = 'col-span-2 relative';
+
             nameInput.removeAttribute('required');
             nameField.classList.remove('opacity-100');
             nameField.classList.add('opacity-0');
             nameField.style.maxHeight = '0px';
+            phoneInput.removeAttribute('required');
+            phoneField.classList.remove('opacity-100');
+            phoneField.classList.add('opacity-0');
+            phoneField.style.maxHeight = '0px';
+            passwordConfirmationInput.removeAttribute('required');
+            passwordConfirmationField.classList.remove('opacity-100');
+            passwordConfirmationField.classList.add('opacity-0');
+            passwordConfirmationField.style.maxHeight = '0px';
+
             setTimeout(() => {
                 nameField.classList.add('hidden');
+                phoneField.classList.add('hidden');
+                passwordConfirmationField.classList.add('hidden');
             }, 300);
         }
 
@@ -152,6 +186,33 @@
         const nextMode = currentAuthMode === 'login' ? 'register' : 'login';
         goToAuth(nextMode);
     }
+
+    function togglePasswordVisibility(inputId) {
+        const input = document.getElementById(inputId);
+        const eyeIcon = document.getElementById(`eye-icon-${inputId}`);
+        const eyeSlashIcon = document.getElementById(`eye-slash-icon-${inputId}`);
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            eyeIcon.classList.add('hidden');
+            eyeSlashIcon.classList.remove('hidden');
+        } else {
+            input.type = 'password';
+            eyeIcon.classList.remove('hidden');
+            eyeSlashIcon.classList.add('hidden');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', (e) => {
+                if (window.Masks) {
+                    e.target.value = window.Masks.phone(e.target.value);
+                }
+            });
+        }
+    });
 </script>
 
 @if ($errors->any())
