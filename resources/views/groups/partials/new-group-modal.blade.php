@@ -1,6 +1,4 @@
-@props(['groupTypes'])
-
-<x-modal-dialog id="new-group-modal" backdrop-id="new-group-backdrop" overflow="overflow-visible">
+<x-modal id="new-group-modal" backdrop-id="new-group-backdrop" overflow="overflow-visible">
     <div id="new-group-form-section">
         <div class="mb-8 relative">
             <h2 class="text-2xl font-black text-slate-900 tracking-tight">Criar Novo Grupo</h2>
@@ -56,7 +54,7 @@
             </button>
         </div>
     </div>
-</x-modal-dialog>
+</x-modal>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

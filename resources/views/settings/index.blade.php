@@ -97,7 +97,7 @@
             </x-card>
         </div>
     </form>
-    <x-change-password-modal />
+    @include('settings.partials.change-password-modal')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -133,7 +133,6 @@
                         clearTimeout(actionsContainer.timeoutId);
                     }
                     
-                    // Apenas adiciona a classe hidden após a transição de 300ms terminar
                     actionsContainer.timeoutId = setTimeout(() => {
                         actionsContainer.classList.add('hidden');
                         actionsContainer.timeoutId = null;
@@ -162,7 +161,6 @@
                         }
                     });
 
-                    // Regra específica para liberar a chave PIX apenas se o tipo estiver selecionado
                     const pixKeyType = document.getElementById('pix_key_type');
                     const pixKey = document.getElementById('pix_key');
                     if (pixKey) {
@@ -237,7 +235,6 @@
                 });
             }
 
-            // Máscara do campo de Telefone (xx) 99999-9999 usando o helper global window.Masks
             const phoneInput = document.getElementById('phone');
             if (phoneInput && window.Masks) {
                 phoneInput.addEventListener('input', (e) => {
@@ -245,7 +242,6 @@
                 });
             }
 
-            // Máscara dinâmica do campo de Chave PIX baseado no Tipo de Chave
             const pixKeyTypeSelect = document.getElementById('pix_key_type');
             const pixKeyInput = document.getElementById('pix_key');
             
@@ -262,7 +258,6 @@
                     }
                 }
 
-                // Quando digita na Chave PIX
                 pixKeyInput.addEventListener('input', (e) => {
                     const type = pixKeyTypeSelect.value;
                     if (type === 'cpf') {
@@ -274,7 +269,6 @@
                     }
                 });
 
-                // Quando muda o Tipo de Chave PIX
                 pixKeyTypeSelect.addEventListener('change', () => {
                     if (isEditing) {
                         if (pixKeyTypeSelect.value) {
@@ -292,10 +286,8 @@
                     applyPixMask();
                 });
 
-                // Formatar chave PIX inicial se já preenchida
                 applyPixMask();
 
-                // Re-aplicar máscara ao reverter valores (clique em cancelar)
                 if (cancelEditBtn) {
                     cancelEditBtn.addEventListener('click', () => {
                         setTimeout(applyPixMask, 0);

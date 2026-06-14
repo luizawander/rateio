@@ -11,5 +11,5 @@
         </div>
     </div>
 
-    <x-new-group-modal :group-types="$groupTypes" />
+    @include('groups.partials.new-group-modal')
 </x-app-layout>

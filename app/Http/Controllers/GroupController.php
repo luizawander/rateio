@@ -17,7 +17,7 @@ class GroupController extends Controller
             'outros' => 'Outros'
         ];
 
-        return view('groups', compact('groupTypes'));
+        return view('groups.index', compact('groupTypes'));
     }
 
     public function store(Request $request, GroupService $groupService)

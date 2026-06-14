@@ -2,6 +2,7 @@
     title="Entrar na sua conta" 
     subtitle="Bem-vindo de volta. Continue de onde parou." 
     onClose="goToLanding()"
+    inline="true"
 >
     <form id="auth-form" method="POST" action="/login" class="space-y-5" novalidate>
         @csrf

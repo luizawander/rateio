@@ -1,4 +1,4 @@
-<x-modal-dialog id="change-password-modal" backdrop-id="change-password-backdrop" title="Alterar Senha" subtitle="Confirme sua senha atual e escolha uma nova senha segura.">
+<x-modal id="change-password-modal" backdrop-id="change-password-backdrop" title="Alterar Senha" subtitle="Confirme sua senha atual e escolha uma nova senha segura.">
     <form action="{{ route('settings.password') }}" method="POST" class="space-y-5 relative">
         @csrf
         @method('PUT')
@@ -18,7 +18,7 @@
             </x-button>
         </div>
     </form>
-</x-modal-dialog>
+</x-modal>
 
 @if($errors->has('current_password') || $errors->has('new_password'))
 <script>
