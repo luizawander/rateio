@@ -22,6 +22,10 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        if (isset($input['phone'])) {
+            $input['phone'] = preg_replace('/\D/', '', $input['phone']);
+        }
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -31,12 +35,20 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
+            'phone' => [
+                'required',
+                'string',
+                'min:10',
+                'max:11',
+                Rule::unique(User::class),
+            ],
+            'password' => array_merge($this->passwordRules(), ['confirmed']),
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
+            'phone' => $input['phone'],
             'password' => Hash::make($input['password']),
         ]);
     }
