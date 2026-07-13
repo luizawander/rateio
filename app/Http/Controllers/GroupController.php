@@ -26,7 +26,13 @@ class GroupController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'type' => ['required', 'string', 'in:casa,viagem,casal,outros'],
+            'custom_type' => ['required_if:type,outros', 'nullable', 'string', 'max:255'],
         ]);
+
+        if ($validated['type'] === 'outros') {
+            $validated['type'] = $validated['custom_type'];
+            unset($validated['custom_type']);
+        }
 
         $group = $groupService->create($validated, Auth::id());
 

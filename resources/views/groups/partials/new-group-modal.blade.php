@@ -18,6 +18,10 @@
                 :options="$groupTypes" 
                 placeholder="Selecione o tipo de grupo" 
             />
+
+            <div id="custom-type-wrapper" class="hidden">
+                <x-input-field label="Qual a categoria?" id="custom_type" name="custom_type" placeholder="Ex: Festa, Projeto, Trabalho" />
+            </div>
             
             <div id="new-group-error" class="hidden text-xs font-semibold text-rose-600 pl-4 mt-2"></div>
 
@@ -64,6 +68,23 @@
         const errorDiv = document.getElementById('new-group-error');
         const copyLinkBtn = document.getElementById('copy-link-btn');
         const addFriendsBtn = document.getElementById('add-friends-btn');
+
+        const typeSelect = document.getElementById('type');
+        const customTypeWrapper = document.getElementById('custom-type-wrapper');
+        const customTypeInput = document.getElementById('custom_type');
+
+        if (typeSelect && customTypeWrapper) {
+            typeSelect.addEventListener('change', () => {
+                if (typeSelect.value === 'outros') {
+                    customTypeWrapper.classList.remove('hidden');
+                } else {
+                    customTypeWrapper.classList.add('hidden');
+                    if (customTypeInput) {
+                        customTypeInput.value = '';
+                    }
+                }
+            });
+        }
 
         if (form) {
             form.addEventListener('submit', async (e) => {
