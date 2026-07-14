@@ -36,27 +36,18 @@
         </form>
     </div>
 
-    <div id="new-group-success-section" class="hidden flex flex-col items-center text-center space-y-6">
-        <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-500/10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-            </svg>
-        </div>
-        
-        <div>
-            <h2 class="text-2xl font-black text-slate-900 tracking-tight">Grupo criado!</h2>
-            <p class="text-sm text-slate-500 mt-2">Seu grupo foi criado com sucesso. Agora você pode adicionar amigos ou compartilhar o link de acesso.</p>
-        </div>
+    <div id="new-group-success-section" class="hidden">
+        <x-status-card type="success" title="Grupo criado!" subtitle="Seu grupo foi criado com sucesso. Agora você pode adicionar amigos ou compartilhar o link de acesso.">
+            <div class="flex gap-3">
+                <x-copy-button id="copy-link-btn" variant="white" success-text="Link copiado!" :full="true" size="sm" class="py-3 text-sm">
+                    Copiar link do grupo
+                </x-copy-button>
 
-        <div class="w-full pt-4 flex flex-col gap-3">
-            <x-copy-button id="copy-link-btn" success-text="Link copiado!" :full="true" size="sm" class="py-3 text-sm">
-                Copiar link do grupo
-            </x-copy-button>
-            
-            <button type="button" id="add-friends-btn" class="w-full px-6 py-3 rounded-full bg-slate-50 border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-all cursor-pointer">
-                Adicionar amigos
-            </button>
-        </div>
+                <x-button type="button" id="add-friends-btn" variant="pastel-green" :full="true" size="sm" class="py-3">
+                    Adicionar amigos
+                </x-button>
+            </div>
+        </x-status-card>
     </div>
 </x-modal>
 

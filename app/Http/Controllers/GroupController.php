@@ -17,7 +17,9 @@ class GroupController extends Controller
             'outros' => 'Outros'
         ];
 
-        return view('groups.index', compact('groupTypes'));
+        $groups = Auth::user()->groups()->with('members')->latest()->get();
+
+        return view('groups.index', compact('groupTypes', 'groups'));
     }
 
     public function store(Request $request, GroupService $groupService)

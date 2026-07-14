@@ -88,6 +88,13 @@
                 close(id) {
                     const modal = document.getElementById(id);
                     if (!modal) return;
+
+                    const successSection = modal.querySelector('[id$="-success-section"]');
+                    if (successSection && !successSection.classList.contains('hidden')) {
+                        window.location.reload();
+                        return;
+                    }
+
                     const modalContent = modal.querySelector('.transform');
                     modal.classList.remove('opacity-100');
                     modal.classList.add('opacity-0');
