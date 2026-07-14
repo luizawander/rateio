@@ -3,18 +3,14 @@
 
     @if (session('status') === 'settings-updated')
         <div class="bg-emerald-50 text-emerald-700 px-6 py-4 rounded-2xl mb-6 font-bold border border-emerald-100/50 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-emerald-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
+            <x-heroicon-o-check-circle class="w-5 h-5 text-emerald-600" />
             Configurações salvas com sucesso!
         </div>
     @endif
 
     @if (session('status') === 'password-updated')
         <div class="bg-emerald-50 text-emerald-700 px-6 py-4 rounded-2xl mb-6 font-bold border border-emerald-100/50 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-emerald-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
+            <x-heroicon-o-check-circle class="w-5 h-5 text-emerald-600" />
             Senha alterada com sucesso!
         </div>
     @endif
