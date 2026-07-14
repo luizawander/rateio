@@ -21,6 +21,7 @@
         'white' => 'bg-white border border-slate-200/80 hover:border-slate-300 text-slate-700',
         'emerald' => 'bg-emerald-500 hover:bg-[#008f5d] text-white border border-emerald-600/10',
         'pastel-green' => 'bg-[#66DCB6] hover:bg-[#4ecd9e] text-slate-800 border border-[#57d4ad]',
+        'turquoise-blue' => 'bg-[#26a4b6] hover:bg-[#1f8d9d] text-white border border-[#1f8d9d]/10',
     ];
 
     $selectedClass = $variantClasses[$variant] ?? $variantClasses['gold'];

@@ -20,10 +20,6 @@
                                 </button>
                             </form>
                         </div>
-                    @else
-                        <button onclick="goToAuth('login')" class="btn-primary-sm cursor-pointer">
-                            login
-                        </button>
                     @endauth
                 </div>
             </header>
@@ -43,9 +39,12 @@
                             </span>
                         </div>
                     @else
-                        <div id="hero-action-btn" class="pt-4">
+                        <div id="hero-action-btn" class="pt-4 flex items-center justify-center gap-3">
                             <button onclick="goToAuth('register')" class="btn-primary text-base cursor-pointer">
-                                criar minha conta
+                                Criar conta
+                            </button>
+                            <button onclick="goToAuth('login')" class="btn-primary text-base cursor-pointer">
+                                Login
                             </button>
                         </div>
                     @endauth

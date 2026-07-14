@@ -34,7 +34,7 @@ class SettingsController extends Controller
 
     public function index(): View
     {
-        return view('settings', [
+        return view('settings.index', [
             'genders' => self::GENDERS,
             'pixKeyTypes' => self::PIX_KEY_TYPES,
         ]);
