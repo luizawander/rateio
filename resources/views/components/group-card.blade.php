@@ -3,15 +3,10 @@
 ])
 
 @php
-    $typeLabel = ucfirst($group->type);
+    $groupType = \App\Enums\GroupType::tryFrom($group->type);
+    $typeLabel = $groupType?->label() ?? ucfirst($group->type);
     $memberCount = $group->members->count();
-
-    $typeIcons = [
-        'casa' => 'heroicon-o-home',
-        'viagem' => 'heroicon-o-briefcase',
-        'casal' => 'heroicon-o-heart',
-    ];
-    $iconName = $typeIcons[$group->type] ?? 'heroicon-o-light-bulb';
+    $iconName = $groupType?->icon() ?? 'heroicon-o-light-bulb';
 @endphp
 
 <x-card hover class="!p-5">
