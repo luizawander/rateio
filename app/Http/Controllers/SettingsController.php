@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Gender;
+use App\Enums\PixKeyType;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,21 +12,6 @@ use Illuminate\View\View;
 
 class SettingsController extends Controller
 {
-    public const GENDERS = [
-        'feminino' => 'Feminino',
-        'masculino' => 'Masculino',
-        'prefer_not_to_say' => 'Prefiro não informar',
-        'other' => 'Outro',
-    ];
-
-    public const PIX_KEY_TYPES = [
-        'cpf' => 'CPF',
-        'cnpj' => 'CNPJ',
-        'email' => 'E-mail',
-        'phone' => 'Telefone',
-        'random_key' => 'Chave Aleatória',
-    ];
-
     protected UserService $userService;
 
     public function __construct(UserService $userService)
@@ -35,8 +22,8 @@ class SettingsController extends Controller
     public function index(): View
     {
         return view('settings.index', [
-            'genders' => self::GENDERS,
-            'pixKeyTypes' => self::PIX_KEY_TYPES,
+            'genders' => Gender::options(),
+            'pixKeyTypes' => PixKeyType::options(),
         ]);
     }
 
@@ -54,9 +41,9 @@ class SettingsController extends Controller
                 Rule::unique('users')->ignore($user->id),
             ],
             'phone' => ['nullable', 'string', 'max:20'],
-            'gender' => ['nullable', 'string', Rule::in(array_keys(self::GENDERS))],
+            'gender' => ['nullable', Rule::enum(Gender::class)],
             'birth_date' => ['nullable', 'date'],
-            'pix_key_type' => ['nullable', 'string', Rule::in(array_keys(self::PIX_KEY_TYPES))],
+            'pix_key_type' => ['nullable', Rule::enum(PixKeyType::class)],
             'pix_key' => ['nullable', 'string', 'max:255'],
             'email_notifications' => ['nullable'],
             'due_reminders' => ['nullable'],

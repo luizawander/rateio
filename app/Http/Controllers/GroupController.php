@@ -19,6 +19,7 @@ class GroupController extends Controller
 
         $groups = Auth::user()->groups()->with('members')->latest()->get();
 
+        //compact pega as variáveis e cria um array com elas
         return view('groups.index', compact('groupTypes', 'groups'));
     }
 
